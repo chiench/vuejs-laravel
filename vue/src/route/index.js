@@ -4,14 +4,15 @@ import Login from '../view/Login.vue'
 import Register from '../view/Register.vue'
 import Survays from '../view/Survays.vue'
 import Defautlayout from '../components/Defautlayout.vue'
-import store from "../store";
+import LayoutAuth from '../components/LayoutAuth.vue'
+import store from "../store"
 
 
 const routes = [
     {
         path: '/',
         redirect: '/dashboard',
-        meta: { requiresAuth :false},// them 1 the meta xac thuc xem da duogn nhap chua 
+        meta: { requiresAuth :true},// them 1 the meta xac thuc xem da duogn nhap chua 
         component: Defautlayout,
         children: [
             {
@@ -28,14 +29,24 @@ const routes = [
         ],
     },
     {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    },
-    {
-        path: '/register',
-        name: 'Register',
-        component: Register
+        path:'/Auth',
+        redirect:'/login',
+        meta: {isGuest:false},
+        component: LayoutAuth,
+        children:[
+            
+                {
+                    path: '/login',
+                    name: 'Login',
+                    component: Login
+                },
+                {
+                    path: '/register',
+                    name: 'Register',
+                    component: Register
+                }, 
+            
+        ],
     },
 
 ];
@@ -47,10 +58,23 @@ const router = createRouter({
     routes
 });
 router.beforeEach((to, from, next) =>{
-    if(store.state.user.data.token)
+    if(to.meta.requiresAuth && !store.state.user.token){
     next({name:'Login'});
+    }else if( store.state.user.token && to.meta.isGuest) {
+        next({name:'Dashboard'});
+    
+    }
     else{
         next()
     }
 })
+// router.beforeEach((to, from, next) => {
+//     if (to.meta.requiresAuth && !store.state.user.token) {
+//       next({ name: "Login" });
+//     } else if (store.state.user.token && to.meta.isGuest) {
+//       next({ name: "Dashboard" });
+//     } else {
+//       next();
+//     }
+//   });
 export default router;
