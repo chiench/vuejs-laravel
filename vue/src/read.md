@@ -1,3 +1,4 @@
+// day 1 
 hocj dc cac truyen gia tri thong qua setup va computend 
 router link dung de lien ke link nhu the a 
 tao mang cac gia tri cho lap 
@@ -12,4 +13,7 @@ sau do phai tra ve logot tai mk khai bao ma k dua ra su dung thi sao ap dung dc
 sau do khai bao mutations de
 ?
 dua cai data ve rong va token == null tuc la mk ve trang login khi mink logut 
+// day 2 
+dung component de thay the nhung thanh phan dung chung ( dung thi phai import)
+truyen bien qua component dung defindProps ten bien:typeof <script setup>
 
