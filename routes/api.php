@@ -15,10 +15,14 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('logout',[AuthController::class,'logout'])->name('logout');
 });
-
-Route::post('register',[AuthController::class,'Register']);
+Route::post('register',[AuthController::class,'Register'])->name('Register');
+Route::post('login',[AuthController::class,'login'])->name('Login');
 Route::get('users/{id}',[AuthController::class,'delete']);
 Route::get('users',[AuthController::class,'list']);
+

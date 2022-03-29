@@ -12,7 +12,7 @@ const routes = [
     {
         path: '/',
         redirect: '/dashboard',
-        meta: { requiresAuth :true},// them 1 the meta xac thuc xem da duogn nhap chua 
+        meta: { requiresAuth :true},// them 1 the meta xac thuc xem da duogn nhap chua
         component: Defautlayout,
         children: [
             {
@@ -34,7 +34,7 @@ const routes = [
         meta: {isGuest:false},
         component: LayoutAuth,
         children:[
-            
+
                 {
                     path: '/login',
                     name: 'Login',
@@ -44,14 +44,14 @@ const routes = [
                     path: '/register',
                     name: 'Register',
                     component: Register
-                }, 
-            
+                },
+
         ],
     },
 
 ];
 
-// truoc khi route thuc hien truyen di 
+// truoc khi route thuc hien truyen di
 
 const router = createRouter({
     history: createWebHistory(),
@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) =>{
     next({name:'Login'});
     }else if( store.state.user.token && to.meta.isGuest) {
         next({name:'Dashboard'});
-    
+
     }
     else{
         next()

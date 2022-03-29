@@ -26,7 +26,7 @@
                 <div>
                   <MenuButton class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                    <img class="h-8 w-8 rounded-full" src="" alt="" />
                   </MenuButton>
                 </div>
                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -51,18 +51,18 @@
       </div>
 
       <DisclosurePanel class="md:hidden">
-     
+
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <router-link v-for="item in navigation" :key="item.name" :to="item.to" active-class="bg-gray-900 text-white" :class="[this.$router.name === item.to.name ? '' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']" >{{ item.name }}</router-link>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+              <img class="h-10 w-10 rounded-full" src="" alt="" />
             </div>
             <div class="ml-3">
-              <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
-              <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div>
+              <div class="text-base font-medium leading-none text-white"></div>
+              <div class="text-sm font-medium leading-none text-gray-400"></div>
             </div>
             <button type="button" class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span class="sr-only">View notifications</span>
@@ -107,17 +107,16 @@ export default {
     MenuIcon,
     XIcon,
   },
- 
+
 
   setup() {
     const store = useStore();
     const router = useRouter();
     function logout(){
 
-      store.commit('logout');
-      router.push({
-        name:'Login'
-      });
+      store.dispatch('logout').then((res)=>{
+        router.push({name:'Login'})
+    })
     }
     return {
       user: computed(() =>
@@ -125,7 +124,7 @@ export default {
     ),
       navigation,
       logout
-     
+
     }
   },
 

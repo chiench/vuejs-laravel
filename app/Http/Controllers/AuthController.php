@@ -46,8 +46,36 @@ class AuthController extends Controller
 
     public function Login(Request $request)
     {
+        $handel = $request->validate([
+            'email' => 'required|email||exists:users,email',
+            'password' =>'required',
+            'remember' =>'boolean'
+
+        ]);
+        $remember = $handel['remember']?? false;
+        unset($handel['remember']);
+        if( !Auth::attempt($handel,$remember))
+        {
+            return response([
+                'error' => 'The email or password dose not exist',
+            ],403);
+        }
+        $user = Auth::user();
+        $token = $user->createToken('main')->plainTextToken;
+        return response([
+            'user' => $user,
+            'token' => $token
+        ]);
+
 
     }
+
+    public function logout(){
+        $user = Auth::user();
+        $user->currentAccessToken()->delete();
+        return response('Success');
+    }
+
     public function delete($id)
     {
         $user = User::findOrfail($id);

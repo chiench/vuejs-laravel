@@ -17,3 +17,11 @@ dua cai data ve rong va token == null tuc la mk ve trang login khi mink logut
 dung component de thay the nhung thanh phan dung chung ( dung thi phai import)
 truyen bien qua component dung defindProps ten bien:typeof <script setup>
 
+tao model survays , question and answer ( khoa ngoai dung forginInFor thanh cho cacasde delele)
+sau do tao auth controller de dang ky tk , login, doi mat ,
+trong pt dki : co them moi user va tao token cho cai user them do -> muc dichd e moi user co token rieng 
+tiep theo den frontend ,
+hieu ro ve core concept cua vuex
+dk tai khoan thong qua fetch cau js , this giup call api thong qua url sau do lay va xu ly res tra ve cua 1 req
+sau do luu cai token lay qua sessionStorage vs key,value r attribute state trong sessionStorage qua pt get item key
+//day 3
