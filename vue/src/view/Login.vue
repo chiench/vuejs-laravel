@@ -36,8 +36,32 @@
       </div>
 
       <form class="mt-8 space-y-6" @submit="login">
-        <div v-if="errorMes" class="p-2 bg-red-600 text-white rounded">
+        <div
+          style="position: relative"
+          v-if="errorMes"
+          class="p-2 bg-red-600 text-white rounded"
+        >
           {{ errorMes }}
+          <span
+
+            style="position: absolute; cursor: pointer; top: 0; right: 0"
+            @click="errorMes = ''"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </span>
         </div>
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
@@ -106,7 +130,7 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input
-            v-model="user.remember"
+              v-model="user.remember"
               id="remember-me"
               name="remember-me"
               type="checkbox"
@@ -119,7 +143,7 @@
                 rounded
               "
             />
-            <label  for="remember-me" class="ml-2 block text-sm text-gray-900">
+            <label for="remember-me" class="ml-2 block text-sm text-gray-900">
               Remember me
             </label>
           </div>
@@ -184,7 +208,7 @@ const router = useRouter();
 const user = {
   email: "",
   password: "",
-  remember: false
+  remember: false,
 };
 let errorMes = ref("");
 
@@ -200,3 +224,6 @@ function login(ev) {
     });
 }
 </script>
+<style scoped>
+
+</style>
